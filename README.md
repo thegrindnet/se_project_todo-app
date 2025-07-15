@@ -1,17 +1,36 @@
-# Simple Todo App
+# SE Project: Simple ToDo App
 
-Give a brief description of the project here. Feel free to give it a different name.
+A lightweight full-stack ToDo application built as part of a software engineering course. It enables users to **add**, **view**, and **delete** tasks with a clean, intuitive interface.
 
-## Functionality
+## Project features and technologies
 
-Give a more detailed explanation of the project and its functionality.
+- Semantic HTML5
+- CSS3
+- Responsive design using media queries
+- Flexbox
+- Git & GitHub
+- Flat BEM file structure
+- Javascript
+- Object Oriented Programming
+- **Create Tasks**: Write a task title and description to add to your list.
+- **Mark as Done / Undone**: Toggle tasks to track progress.
+- **Delete Tasks**: Remove tasks you no longer need.
 
-## Technology
+### Overview
 
-Give a description of the technologies and techniques used. Pictures, GIFs, or screenshots that detail the project features are recommended.
+#### Functionality
 
-## Deployment
+This ToDo app allows users to manage tasks efficiently through a simple interface. Users can:
 
-This project is deployed on GitHub Pages:
+-Add new tasks by entering a title and optional description.
+-View a list of all tasks, including their completion status.
+-Mark tasks as completed or uncompleted to track progress.
+-Delete tasks that are no longer needed.
 
-- ADD LINK HERE
+#### App interactive funcionality
+
+Javascript is added to implement interactive functionality for adding new tasks, marking the completion date, checking and unchecking tasks and deleting tasks. Form validation for Improved UX.
+
+**GitHub**
+
+- [Link to the project on GitHub](https://github.com/thegrindnet/se_project_todo-app.git)
