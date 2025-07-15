@@ -27,8 +27,6 @@ This ToDo app allows users to manage tasks efficiently through a simple interfac
 -Mark tasks as completed or uncompleted to track progress.
 -Delete tasks that are no longer needed.
 
-#### App interactive funcionality
-
 Javascript is added to implement interactive functionality for adding new tasks, marking the completion date, checking and unchecking tasks and deleting tasks. Form validation for Improved UX.
 
 **GitHub**

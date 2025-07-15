@@ -11,10 +11,14 @@ const todosList = document.querySelector(".todos__list");
 
 const openModal = (modal) => {
   modal.classList.add("popup_visible");
+  modal.addEventListener("click", closePopupOnOverlay);
+  document.addEventListener("keydown", handleEscape);
 };
 
 const closeModal = (modal) => {
   modal.classList.remove("popup_visible");
+  modal.removeEventListener("click", closePopupOnOverlay);
+  document.removeEventListener("keydown", handleEscape);
 };
 
 const generateTodo = (data) => {
@@ -51,6 +55,19 @@ initialTodos.forEach((item) => {
   const todo = generateTodo(item);
   todosList.append(todo);
 });
+
+function closePopupOnOverlay(evt) {
+  if (!evt.target.classList.contains(".popup_fieldset")) {
+    closeModal(evt.target);
+  }
+}
+
+function handleEscape(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_visible");
+    closeModal(openedPopup);
+  }
+}
 
 const newTodoValidator = new FormValidator(validationConfig, addTodoForm);
 newTodoValidator.enableValidation();
