@@ -31,4 +31,4 @@ Javascript is added to implement interactive functionality for adding new tasks,
 
 **GitHub**
 
-- [Link to the project on GitHub](https://github.com/thegrindnet/se_project_todo-app.git)
+- [Link to the project on GitHub](https://thegrindnet.github.io/se_project_todo-app/)

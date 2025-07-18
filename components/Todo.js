@@ -1,3 +1,5 @@
+import { countListItems } from "../pages/index.js";
+
 class Todo {
   constructor(data, selector) {
     this._data = data;
@@ -7,10 +9,12 @@ class Todo {
   _setEventListeners() {
     this._todoDeleteBtn.addEventListener("click", () => {
       this._todoElement.remove();
+      countListItems();
     });
 
     this._todoCheckboxEl.addEventListener("change", () => {
       this._data.completed = !this._data.completed;
+      countListItems();
     });
   }
 
@@ -23,10 +27,10 @@ class Todo {
     this._todoLabel.setAttribute("for", `todo-${this._data.id}`);
   }
 
-  _dueDate() {
-    this._dueDate = new Date(this._data.date);
-    if (!isNaN(this._dueDate)) {
-      this._todoDate.textContent = `Due: ${this._dueDate.toLocaleString(
+  _setDueDate() {
+    this._completionDate = new Date(this._data.date);
+    if (!isNaN(this._completionDate)) {
+      this._todoDate.textContent = `Due: ${this._completionDate.toLocaleString(
         "en-Us",
         {
           year: "numeric",
@@ -47,7 +51,7 @@ class Todo {
     this._todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");
     this._todoNameEl.textContent = this._data.name;
 
-    this._dueDate();
+    this._setDueDate();
     this._generateCheckboxEl();
     this._setEventListeners();
 

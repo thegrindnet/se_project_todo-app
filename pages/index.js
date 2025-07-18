@@ -8,6 +8,8 @@ const addTodoPopup = document.querySelector("#add-todo-popup");
 const addTodoForm = addTodoPopup.querySelector(".popup__form");
 const addTodoCloseBtn = addTodoPopup.querySelector(".popup__close");
 const todosList = document.querySelector(".todos__list");
+const counterEl = document.querySelector(".counter__text");
+const listItemCount = document.querySelectorAll("ul li.todo").length;
 
 const openModal = (modal) => {
   modal.classList.add("popup_visible");
@@ -24,8 +26,21 @@ const closeModal = (modal) => {
 const generateTodo = (data) => {
   const todo = new Todo(data, "#todo-template");
   const todoElement = todo.getView();
-
   return todoElement;
+};
+
+export const countListItems = () => {
+  const listItem = document.querySelectorAll("ul li.todo");
+  const listItemCount = listItem.length;
+  let completedCounter = 0;
+  listItem.forEach((item) => {
+    if (item.querySelector(".todo__completed").checked) {
+      completedCounter += 1;
+    }
+  });
+
+  console.log(completedCounter);
+  counterEl.textContent = `Showing ${completedCounter} of ${listItemCount} completed`;
 };
 
 addTodoButton.addEventListener("click", () => {
@@ -48,7 +63,9 @@ addTodoForm.addEventListener("submit", (evt) => {
   const values = { name, date, id };
   const todo = generateTodo(values);
   todosList.append(todo);
+  countListItems();
   closeModal(addTodoPopup);
+  newTodoValidator.resetValidation();
 });
 
 initialTodos.forEach((item) => {
@@ -57,7 +74,7 @@ initialTodos.forEach((item) => {
 });
 
 function closePopupOnOverlay(evt) {
-  if (!evt.target.classList.contains(".popup_fieldset")) {
+  if (!evt.target.classList.contains("popup_fieldset")) {
     closeModal(evt.target);
   }
 }
@@ -69,5 +86,6 @@ function handleEscape(evt) {
   }
 }
 
+countListItems();
 const newTodoValidator = new FormValidator(validationConfig, addTodoForm);
 newTodoValidator.enableValidation();
