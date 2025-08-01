@@ -1,12 +1,7 @@
-// import { countListItems } from "../pages/index.js";
-
 class Todo {
   constructor(data, selector, handleCheck, handleDelete) {
     this._data = data;
     this._templateElement = document.querySelector(selector);
-    this._name = data.name;
-    this._date = data.date;
-    this._id = data.id;
     this._selector = selector;
     this._completed = data.completed;
     this._handleCheck = handleCheck;

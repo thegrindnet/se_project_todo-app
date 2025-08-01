@@ -57,9 +57,5 @@ const section = new Section({
 
 section.renderItems();
 
-addTodoButton.addEventListener("click", () => {
-  addTodoPopup.open();
-});
-
 const newTodoValidator = new FormValidator(validationConfig, addTodoForm);
 newTodoValidator.enableValidation();
