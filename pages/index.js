@@ -4,14 +4,11 @@ import Todo from "../components/Todo.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
-// https://github.com/Vellarak/se_project_todo-app/blob/main/pages/index.js
+import TodoCounter from "../components/TodoCounter.js";
+
 const addTodoButton = document.querySelector(".button_action_add");
-const addTodoPopupEl = document.querySelector("#add-todo-popup");
 const addTodoForm = document.forms["add-todo-form"];
-const addTodoCloseBtn = addTodoPopupEl.querySelector(".popup__close");
-const todosList = document.querySelector(".todos__list");
-const counterEl = document.querySelector(".counter__text");
-const listItemCount = document.querySelectorAll("ul li.todo").length;
+const todoCounter = new TodoCounter(initialTodos, ".counter__text");
 
 const addTodoPopup = new PopupWithForm({
   popupSelector: "#add-todo-popup",
@@ -24,41 +21,25 @@ const addTodoPopup = new PopupWithForm({
     const id = uuidv4();
     const values = { name, date, id };
     renderTodo(values);
+    todoCounter.updateTotal(true);
   },
 });
 
 addTodoPopup.setEventListeners();
 
-// addTodoForm.addEventListener("submit", (evt) => {
-//   evt.preventDefault();
-//   const name = evt.target.name.value;
-//   const dateInput = evt.target.date.value;
+function handleCheck(completed) {
+  todoCounter.updateCompleted(completed);
+}
 
-//   const date = new Date(dateInput);
-//   date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
-
-//   const id = uuidv4();
-//   const values = { name, date, id };
-//   renderTodo(values);
-//   countListItems();
-//   closeModal(addTodoPopupEl);
-//   newTodoValidator.resetValidation();
-// });
-
-// const openModal = (modal) => {
-//   modal.classList.add("popup_visible");
-//   modal.addEventListener("click", closePopupOnOverlay);
-//   document.addEventListener("keydown", handleEscape);
-// };
-
-// const closeModal = (modal) => {
-//   modal.classList.remove("popup_visible");
-//   modal.removeEventListener("click", closePopupOnOverlay);
-//   document.removeEventListener("keydown", handleEscape);
-// };
+function handleDelete(completed) {
+  if (completed) {
+    todoCounter.updateCompleted(false);
+  }
+  todoCounter.updateTotal(false);
+}
 
 const generateTodo = (data) => {
-  const todo = new Todo(data, "#todo-template");
+  const todo = new Todo(data, "#todo-template", handleCheck, handleDelete);
   const todoElement = todo.getView();
   return todoElement;
 };
@@ -76,45 +57,9 @@ const section = new Section({
 
 section.renderItems();
 
-export const countListItems = () => {
-  const listItem = document.querySelectorAll("ul li.todo");
-  const listItemCount = listItem.length;
-  let completedCounter = 0;
-  listItem.forEach((item) => {
-    if (item.querySelector(".todo__completed").checked) {
-      completedCounter += 1;
-    }
-  });
-
-  // console.log(completedCounter);
-  counterEl.textContent = `Showing ${completedCounter} of ${listItemCount} completed`;
-};
-
 addTodoButton.addEventListener("click", () => {
   addTodoPopup.open();
 });
 
-// addTodoCloseBtn.addEventListener("click", () => {
-//   addTodoPopup.close();
-// });
-
-// initialTodos.forEach((item) => {
-//   renderTodo(item);
-// });
-
-// function closePopupOnOverlay(evt) {
-//   if (!evt.target.classList.contains("popup__fieldset")) {
-//     closeModal(evt.target);
-//   }
-// }
-
-// function handleEscape(evt) {
-//   if (evt.key === "Escape") {
-//     const openedPopup = document.querySelector(".popup_visible");
-//     closeModal(openedPopup);
-//   }
-// }
-
-countListItems();
 const newTodoValidator = new FormValidator(validationConfig, addTodoForm);
 newTodoValidator.enableValidation();
