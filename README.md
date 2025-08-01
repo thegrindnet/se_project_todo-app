@@ -15,6 +15,7 @@ A lightweight full-stack ToDo application built as part of a software engineerin
 - **Create Tasks**: Write a task title and description to add to your list.
 - **Mark as Done / Undone**: Toggle tasks to track progress.
 - **Delete Tasks**: Remove tasks you no longer need.
+- **Classes**: Code refactor to re-useablity
 
 ### Overview
 
